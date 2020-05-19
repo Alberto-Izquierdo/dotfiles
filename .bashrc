@@ -56,11 +56,33 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+COLOR_RED="\033[0;31m"
+COLOR_YELLOW="\033[0;33m"
+COLOR_GREEN="\033[0;32m"
+COLOR_OCHRE="\033[38;5;95m"
+COLOR_BLUE="\033[0;34m"
+COLOR_WHITE="\033[0;37m"
+COLOR_RESET="\033[0m"
+
+function git_color {
+  local git_status="$(git status 2> /dev/null)"
+
+  if [[ $git_status =~ "nothing to commit" ]]; then
+    echo -e $COLOR_GREEN
+  elif [[ $git_status =~ "nothing added to commit but untracked files present" ]]; then
+    echo -e $COLOR_RED
+  elif [[ $git_status =~ "Changes to be committed" ]]; then
+    echo -e $COLOR_YELLOW
+  else
+    echo -e $COLOR_OCHRE
+  fi
+}
+
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
 }
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u\[\033\]\[[01;35m\]@\[\033\]\[[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\] $(parse_git_branch)\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u\[\033\]\[[01;35m\]@\[\033\]\[[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[$(git_color)\] $(parse_git_branch)\[\033[00m\] \$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
 fi

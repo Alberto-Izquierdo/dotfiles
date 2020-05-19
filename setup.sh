@@ -12,5 +12,5 @@ sudo mv /usr/share/X11/xorg.conf.d/10-monitor.conf ./backup/
 cp ./.bashrc ~
 cp ./.gitignore ~
 cp ./.tmux.conf ~
-cp ./.bash_profile.conf ~
+cp ./.bash_profile ~
 sudo cp ./10-monitor.conf /usr/share/X11/xorg.conf.d/
