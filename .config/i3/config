@@ -178,4 +178,13 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        mode dock
+        # Disable all tray icons
+        font pango:Noto Mono for Powerline 14
+        separator_symbol |
+        colors {
+                background #222222
+                statusline #ffffff
+                separator #666666
+        }
 }
