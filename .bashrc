@@ -151,3 +151,4 @@ stty -ixon
 if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
 fi
+export NINJA_STATUS="[%u/%r/%f/%t]"
