@@ -79,10 +79,18 @@ function git_color {
 }
 
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1/'
+}
+parse_git_commit() {
+  if git rev-list -1 HEAD > /dev/null 2>&1 ; then
+      git_sha1="|$(git rev-list -1 HEAD | awk '{print substr($0,0,7)}')]"
+  else
+      git_sha1=''
+  fi
+  echo "$git_sha1"
 }
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u\[\033\]\[[01;35m\]@\[\033\]\[[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[$(git_color)\] $(parse_git_branch)\[\033[00m\] \$ '
+	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u\[\033\]\[[01;35m\]@\[\033\]\[[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[$(git_color)\] $(parse_git_branch)$(parse_git_commit)\[\033[00m\] \$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
 fi
