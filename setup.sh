@@ -7,6 +7,7 @@ mkdir -p ${backup_directory}
 
 #backup the previous configuration
 cp ~/.bashrc ${backup_directory}
+cp ~/.zshrc ${backup_directory}
 cp ~/.gitignore ${backup_directory}
 cp ~/.tmux.conf ${backup_directory}
 cp ~/.bash_profile ${backup_directory}
@@ -16,6 +17,7 @@ cp ~/.gitconfig ${backup_directory}
 
 #copy the new one
 cp ./.bashrc ~
+cp ./.zshrc ~
 cp ./.gitignore ~
 cp ./.tmux.conf ~
 cp ./.bash_profile ~
