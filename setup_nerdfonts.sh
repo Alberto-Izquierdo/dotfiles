@@ -7,5 +7,5 @@ echo "Installing nerd-fonts ..."
 ./install.sh
 cd ..
 rm -rf nerd-fonts
-echo "Nerd-fonts installed!
+echo "Nerd-fonts installed!"
 popd
