@@ -11,3 +11,7 @@ PS1='[\u@\h \W]\$ '
 
 # setup starship:
 eval "$(starship init bash)"
+eval "$(fzf --bash)"
+eval "$(zoxide init bash)"
+
+alias cd="z"
